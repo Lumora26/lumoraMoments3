@@ -1,0 +1,149 @@
+/* ==========================================================================
+   ESTILO GERAL DO PORTAL E HEADER (memorial.css) [1]
+   ========================================================================== */
+.memorial-container {
+    max-width: 576px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 0 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.memorial-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.memorial-date {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-rose-gold);
+    margin-bottom: 0.75rem;
+}
+
+.profile-frame {
+    position: relative;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0.25rem;
+    background: linear-gradient(to top right, var(--color-rose-gold), var(--color-blush));
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.25rem;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--color-white);
+}
+
+.profile-name {
+    font-size: 1.875rem;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    color: var(--color-text-dark);
+}
+
+.profile-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.625;
+    max-width: 24rem;
+    margin-top: 1rem;
+    padding: 0 1.5rem;
+}
+
+/* Novo: Estilização do Contador de Relacionamento no Topo */
+.love-counter-container {
+    margin-top: 1.5rem;
+    background-color: var(--color-text-dark); /* Burgundy de alto contraste */
+    border: 2px solid var(--color-rose-gold);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    width: 100%;
+    max-width: 26rem;
+    box-shadow: 0 8px 30px rgba(61, 29, 29, 0.25);
+    text-align: center;
+}
+
+.love-counter-title {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-rose-gold);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.love-counter-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.35rem;
+}
+
+.counter-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 253, 252, 0.08);
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(212, 140, 112, 0.3);
+}
+
+.counter-number {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-white);
+    text-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+
+.counter-label {
+    font-size: 0.45rem;
+    color: var(--color-rose-gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 0.125rem;
+}
+
+.welcome-badge {
+    margin-top: 1.5rem;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    padding: 0.625rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-blush);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Rodapé do Memorial */
+.memorial-footer {
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 0.5625rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.625;
+}
+
+.discreet-text {
+    opacity: 0.75;
+}

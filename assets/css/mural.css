@@ -1,0 +1,261 @@
+/* ==========================================================================
+   MURAL DE NOTAS E FORMULÁRIO DE ENVIO (mural.css) [1]
+   ========================================================================== */
+.mural-section {
+    margin-top: 3rem;
+}
+
+.mural-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mural-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-rose-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.live-indicator {
+    position: relative;
+    display: flex;
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.live-ping {
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: #4ade80;
+    opacity: 0.75;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.live-dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: #22c55e;
+}
+
+.mural-status {
+    font-size: 0.5625rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-container {
+    background-color: var(--color-card);
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+    margin-bottom: 1.5rem;
+}
+
+.mural-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.input-field, .select-field, .textarea-field {
+    width: 100%;
+    font-size: 0.75rem;
+    padding: 0.625rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text-dark);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.input-field:focus, .select-field:focus, .textarea-field:focus {
+    border-color: var(--color-rose-gold);
+}
+
+.file-uploader {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+    background-color: var(--color-bg);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.file-uploader:hover {
+    border-color: var(--color-rose-gold);
+}
+
+.file-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+    pointer-events: none;
+}
+
+.preview-container {
+    margin-top: 0.75rem;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-remove-photo {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.625rem;
+    cursor: pointer;
+}
+
+/* CARDS DO MURAL */
+.mural-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mural-card {
+    padding: 1rem;
+    background-color: var(--color-card);
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.mural-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.mural-author-container {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.mural-author {
+    font-family: var(--font-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.mural-relation-badge {
+    font-size: 0.5rem;
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mural-time {
+    font-size: 0.5rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mural-text {
+    font-size: 0.75rem;
+    color: var(--color-text-dark);
+    line-height: 1.625;
+    font-weight: 300;
+}
+
+.mural-media {
+    margin-top: 0.75rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border);
+    max-height: 13rem;
+    cursor: pointer;
+}
+
+.mural-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

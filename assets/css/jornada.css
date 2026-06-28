@@ -1,0 +1,63 @@
+/* ==========================================================================
+   NOSSA JORNADA DO CASAL - 5 MOMENTOS (jornada.css) [1]
+   ========================================================================== */
+.journey-section {
+    margin-top: 3rem;
+}
+
+.journey-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--color-border);
+}
+
+.journey-node {
+    position: relative;
+}
+
+.journey-bullet {
+    position: absolute;
+    left: -24.5px;
+    top: 0.375rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-rose-gold);
+}
+
+.journey-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-rose-gold);
+}
+
+.journey-card {
+    margin-top: 0.625rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.journey-img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.journey-img:hover {
+    opacity: 0.9;
+}
+
+.journey-text {
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    line-height: 1.625;
+}

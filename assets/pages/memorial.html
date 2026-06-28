@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumora Love • Lucas & Gabriela</title>
+    
+    <!-- METATAGS DO CASAL -->
+    <meta name="description" content="Lumora - Eternizando o amor de Lucas & Gabriela">
+    <meta name="author" content="Lumora">
+    <meta name="theme-color" content="#FAF5F5">
+    
+    <!-- METATAGS OPEN GRAPH -->
+    <meta property="og:title" content="Cápsula de Lucas & Gabriela">
+    <meta property="og:description" content="Acesse nosso portal do amor com linha do tempo, contador, mapa e mural ao vivo!">
+    <meta property="og:image" content="./../img/perfil.jpg">
+    <meta property="og:type" content="website">
+    
+    <link rel="shortcut icon" href="./../img/lumora/logolumora.png" type="image/x-icon">
+    
+    <!-- FONTES DO GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- IMPORTAÇÃO DE TODAS AS FOLHAS DE ESTILO EM CSS PURO -->
+    <link rel="stylesheet" href="./../css/style.css">
+    <link rel="stylesheet" href="./../css/botoes.css">
+    <link rel="stylesheet" href="./../css/galeria.css">
+    <link rel="stylesheet" href="./../css/jornada.css">
+    <link rel="stylesheet" href="./../css/lightbox.css">
+    <link rel="stylesheet" href="./../css/memorial.css">
+    <link rel="stylesheet" href="./../css/modais.css">
+    <link rel="stylesheet" href="./../css/mural.css">
+    <link rel="stylesheet" href="./../css/programacao.css">
+</head>
+<body class="bg-light-theme pb-28">
+
+    <!-- CANVAS PARA CÉU ANIMADO (TWINKLING STARS & FLOATING HEARTS) -->
+    <canvas id="starryCanvas"></canvas>
+
+    <!-- PORTAL DO CASAL PRINCIPAL -->
+    <main class="memorial-container">
+
+        <!-- CABEÇALHO -->
+         <header class="memorial-header">
+            <span class="memorial-date">12.06.2023</span>
+            <div class="profile-frame">
+                <img src="./../img/perfil.jpg" alt="Pedro & Mariana" class="profile-img">
+            </div>
+            <h2 class="profile-name font-serif">Lucas & Gabriela</h2>
+            <span class="memorial-date" style="margin-top: 4px;">Nossa Jornada de Amor</span>
+
+            <!-- Frase Definidora do Casal -->
+            <blockquote class="profile-quote font-serif">"No meio de tanta gente e de tantas escolhas, meu coração escolheu você para ser meu lar e minha melhor aventura."</blockquote>
+
+            <!-- CONTADOR DE AMOR DESTAQUE PREMIUM ❤️ -->
+            <div class="love-counter-container">
+                <span class="love-counter-title">❤️ Juntos Para Sempre Há:</span>
+                <div class="love-counter-grid">
+                    <div class="counter-unit">
+                        <span id="years" class="counter-number">0</span>
+                        <span class="counter-label">Anos</span>
+                    </div>
+                    <div class="counter-unit">
+                        <span id="months" class="counter-number">0</span>
+                        <span class="counter-label">Meses</span>
+                    </div>
+                    <div class="counter-unit">
+                        <span id="days" class="counter-number">0</span>
+                        <span class="counter-label">Dias</span>
+                    </div>
+                    <div class="counter-unit">
+                        <span id="hours" class="counter-number">0</span>
+                        <span class="counter-label">Horas</span>
+                    </div>
+                    <div class="counter-unit">
+                        <span id="minutes" class="counter-number">0</span>
+                        <span class="counter-label">Min</span>
+                    </div>
+                    <div class="counter-unit">
+                        <span id="seconds" class="counter-number">0</span>
+                        <span class="counter-label">Seg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOSSO CERTIFICADO DE AMOR (BOTAO GATILHO) -->
+            <div class="certificate-btn-wrapper">
+                <button class="btn-certificate" onclick="toggleModal('certificateModal', true)">
+                    📜 Nosso Certificado de Amor
+                </button>
+            </div>
+
+            <!-- Mensagem de Boas-vindas -->
+             <div class="welcome-badge">
+                ❤️ Feliz nosso dia, meu amor! Bem-vindo ao nosso portal.
+             </div>
+         </header>
+
+         <!-- SEÇÃO DE BOTÕES DE AÇÃO RÁPIDA (3 COLUNAS) -->
+          <section class="actions-section">
+            <div id="actionButtonsGrid" class="actions-grid-wedding">
+                <!-- Botão 1: Cartas Secretas -->
+                 <button id="btnVotos" class="btn-action" onclick="toggleModal('lettersModal', true)">
+                    <span class="btn-icon">✉️</span>
+                    <span class="btn-title">Nossas Cartas</span>
+                    <span class="btn-subtitle">Minhas cartas para você</span>
+                 </button>
+
+                <!-- Botão 2: Trilha Sonora (Spotify) -->
+                <a id="btnPlaylist" href="https://open.spotify.com" target="_blank" class="btn-action">
+                    <span class="btn-icon">🎵</span>
+                    <span class="btn-title">Trilha Sonora</span>
+                    <span class="btn-subtitle">Nossas músicas preferidas</span>
+                </a>
+
+                <!-- Botão 3: Lista de Desejos (Bucket List) -->
+                 <button id="btnDesejos" class="btn-action" onclick="toggleModal('bucketModal', true)">
+                    <span class="btn-icon">✨</span>
+                    <span class="btn-title">Nossos Sonhos</span>
+                    <span class="btn-subtitle">Coisas para fazermos juntos</span>
+                 </button>
+            </div>
+          </section>
+
+          <!-- LINHA DO TEMPO DA PROGRAMAÇÃO DA FESTA (SUPORTE A ADIÇÃO INFINITA) -->
+          <section class="timeline-section">
+            <div class="section-header-timeline">
+                <h3 class="section-title-timeline font-serif">Nossa Linha do Tempo</h3>
+                <button class="btn-add-timeline" onclick="toggleModal('addTimelineModal', true)">Novo Marco ＋</button>
+            </div>
+            <div class="timeline-container" id="timeline-container">
+                <!-- Card deslizante vertical de fundo -->
+                <div id="sliding-card" class="sliding-card"></div>
+                
+                <!-- Div onde as informações carregam dinamicamente da nuvem em tempo real -->
+                <div id="timelineNodesWrapper" class="space-y-4"></div>
+            </div>
+          </section>
+
+          <!-- MAPA DO AMOR INTERATIVO COM DIRECIONAMENTO DO GOOGLE MAPS -->
+          <section class="map-section">
+              <h3 class="section-title font-serif">Nosso Mapa do Amor</h3>
+              <p class="node-desc" style="opacity: 1; transform: scale(1); margin-bottom: 0.5rem;">Lugares do mundo que ganharam um significado especial para nós dois.</p>
+              <div class="map-wrapper" id="loveMap"></div>
+          </section>
+
+           <!-- A JORNADA DO CASAL (5 MOMENTOS HISTÓRICOS) -->
+            <section class="journey-section">
+                <h3 class="section-title font-serif">Nossa Linha do Tempo</h3>
+                <div class="journey-timeline">
+                    <!-- Momento 1 -->
+                     <div class="journey-node">
+                        <div class="journey-bullet"></div>
+                            <span class="journey-label">1. O Primeiro Olhar (2023)</span>
+                            <div class="journey-card">
+                                <img src="./../img/momentos/m1.jpg" alt="Momento 1" class="journey-img" onclick="openLightbox(this.src)">
+                                <p class="journey-text">O esbarrão na cafeteria e a conversa que mudou nossos destinos para sempre.</p>
+                            </div>
+                     </div>
+                     <!-- Momento 2 -->
+                     <div class="journey-node">
+                        <div class="journey-bullet"></div>
+                            <span class="journey-label">2. O Início do Namoro (2023)</span>
+                            <div class="journey-card">
+                                <img src="./../img/momentos/m2.jpg" alt="Momento 2" class="journey-img" onclick="openLightbox(this.src)">
+                                <p class="journey-text">Sob as luzes da cidade e o frio da noite, dissemos nosso primeiro "eu te amo".</p>
+                            </div>
+                     </div>
+                     <!-- Momento 3 -->
+                     <div class="journey-node">
+                        <div class="journey-bullet"></div>
+                            <span class="journey-label">3. A Primeira Viagem (2024)</span>
+                            <div class="journey-card">
+                                <img src="./../img/momentos/m3.jpg" alt="Viagem" class="journey-img" onclick="openLightbox(this.src)">
+                                <p class="journey-text">Nossos pés na areia e a maravilhosa certeza de que o mundo é pequeno perto de nós.</p>
+                            </div>
+                     </div>
+                     <!-- Momento 4 -->
+                     <div class="journey-node">
+                        <div class="journey-bullet"></div>
+                            <span class="journey-label">4. O Noivado (2025)</span>
+                            <div class="journey-card">
+                                <img src="./../img/momentos/m4.jpg" alt="Noivado" class="journey-img" onclick="openLightbox(this.src)">
+                                <p class="journey-text">A decisão de dar o passo mais importante de nossas vidas.</p>
+                            </div>
+                     </div>
+                     <!-- Momento 5 -->
+                     <div class="journey-node">
+                        <div class="journey-bullet"></div>
+                            <span class="journey-label">5. O Casamento (2026)</span>
+                            <div class="journey-card">
+                                <img src="./../img/momentos/m5.jpg" alt="Casamento" class="journey-img" onclick="openLightbox(this.src)">
+                                <p class="journey-text">O dia em que nos tornamos um só perante Deus e todos que amamos.</p>
+                            </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- ENSAIO FOTOGRÁFICO PRÉ-CASAMENTO -->
+            <section class="gallery-section">
+                <h3 class="section-title font-serif">Ensaio Fotográfico & Vídeos</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="./../img/ensaio/e1.jpg" alt="Ensaio 1" onclick="openLightbox(this.src)">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="./../img/ensaio/e2.png" alt="Ensaio 2" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+                    <div class="video-gallery-wrapper">
+                        <video id="ensaioVideo" class="gallery-video" controls preload="metadata">
+                            <source src="./../video/Video Project.mp4" type="video/mp4">
+                        </video>
+                    </div>
+            </section>
+
+            <!-- MURAL DE HOMENAGENS AO VIVO (FIREBASE REAL TIME) -->
+             <section class="mural-section">
+                <div class="mural-header">
+                    <h3 class="mural-title font-serif">
+                        <span class="live-indicator">
+                            <span class="live-ping"></span>
+                            <span class="live-dot"></span>
+                        </span>
+                        Mural ao Vivo
+                    </h3>
+                    <span class="mural-status">Atualizado na hora</span>
+                </div>
+
+                <!-- FORMULARIO DE ENVIO IMEDIATO -->
+                 <div class="form-container glow-rose">
+                    <form onsubmit="handleLiveSubmit(event)" class="mural-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Seu Nome</label>
+                                <input type="text" id="form_name" required class="input-field">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Sentimento</label>
+                                <select id="form_relation" class="select-field">
+                                    <option value="Amor">Amor ❤️</option>
+                                    <option value="Saudade">Saudade 🥺</option>
+                                    <option value="Gratidão">Gratidão ✨</option>
+                                    <option value="Divertido">Divertido 😂</option>
+                                    <option value="Cumplicidade">Cumplicidade 🤝</option>
+                                    <option value="Aventura">Aventura ✈️</option>
+                                    <option value="Romance">Romance 🌹</option>
+                                </select>
+                            </div>
+                        </div>
+                       <div class="form-group">
+                            <label class="form-label">Desejo ao Casal</label>
+                            <textarea id="form_text" rows="2" class="textarea-field" placeholder="Escreva uma mensagem de carinho para nós na hora da festa..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Registrar Momento (Foto)</label>
+                            <div class="file-uploader">
+                                <input type="file" id="form_photo" accept="image/*" class="file-input" onchange="previewImage(event)">
+                                <div id="photo_placeholder" class="file-placeholder">
+                                    <span>📸</span>
+                                    <span>Tirar Foto / Subir Imagem</span>
+                                </div>
+                            </div>
+                            <div id="preview_container" class="preview-container hidden">
+                                <img id="image_preview" src="" class="preview-img" alt="Preview">
+                                <button type="button" class="btn-remove-photo" onclick="removePreview()">&times;</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit uppercase tracking-wide">
+                            Fixar no Mural do Casamento
+                        </button>
+                    </form>
+                </div>
+            
+            <!-- Feed de Mensagens Dinâmico em Tempo Real -->
+            <div id="muralFeed" class="mural-feed">
+                <!-- As mensagens enviadas são injetadas em tempo real pelo Firebase -->
+            </div>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer class="memorial-footer">
+            <p>Lumora Love • Lembrança Única do Nosso Amor</p>
+            <p class="discreet-text">Escaneie o QR Code para viver e reviver estas lembranças</p>
+        </footer>
+        
+    </main>
+
+    <!-- MODAL 1: NOSSAS CARTAS SECRETAS (TABBED) -->
+    <div id="lettersModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title font-serif">Minhas Cartas para Você</h3>
+                <button class="btn-close" onclick="toggleModal('lettersModal', false)">&times;</button>
+            </div>
+            
+            <!-- Alternador de Abas das Cartas -->
+            <div class="tabs-navigation">
+                <button id="tab-c1" onclick="switchLetter(1)" class="tab-btn active">Carta 1</button>
+                <button id="tab-c2" onclick="switchLetter(2)" class="tab-btn">Carta 2</button>
+                <button id="tab-c3" onclick="switchLetter(3)" class="tab-btn">Carta 3</button>
+            </div>
+
+            <!-- Conteúdo das Cartas -->
+            <div class="modal-body-content">
+                <!-- Carta 1 -->
+                <div id="letter-content-1" class="letter-text">
+                    <p class="votos-narrador font-serif">Meu Amor,</p>
+                    <p class="votos-paragrafo">Escrevo esta primeira carta para lembrar do nosso primeiro ano juntos. Parece que foi ontem que nos esbarramos na recepção, e hoje não consigo mais imaginar meus dias sem a leveza do seu riso e seu carinho.</p>
+                </div>
+
+                <!-- Carta 2 -->
+                <div id="letter-content-2" class="letter-text hidden">
+                    <p class="votos-narrador font-serif">Querida Gabi,</p>
+                    <p class="votos-paragrafo">Se eu pudesse listar dez motivos pelos quais me apaixono por você todos os dias, o principal seria o seu cuidado com as pessoas e esse seu jeito único de enxergar beleza nas coisas simples da vida. Amo você!</p>
+                </div>
+
+                <!-- Carta 3 -->
+                <div id="letter-content-3" class="letter-text hidden">
+                    <p class="votos-narrador font-serif">Para o Futuro,</p>
+                    <p class="votos-paragrafo">Esta carta é para os nossos próximos passos. Mal posso esperar para planejarmos nossas próximas viagens, nossa casinha, nossos pets e cada pequena conquista que viveremos de mãos dadas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: NOSSOS SONHOS (BUCKET LIST COM RECURSO DE CRIAR E EXCLUIR NO FIREBASE) -->
+    <div id="bucketModal" class="modal-overlay hidden">
+        <div class="modal-box text-center">
+            <div class="modal-header">
+                <h3 class="modal-title font-serif">Nossa Lista de Desejos ✨</h3>
+                <button class="btn-close" onclick="toggleModal('bucketModal', false)">&times;</button>
+            </div>
+            
+            <!-- FORMULÁRIO PARA ADICIONAR NOVO DESEJO -->
+            <form onsubmit="handleNewBucketSubmit(event)" class="modal-form" style="margin-bottom: 1.5rem;">
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="bucket_new_input" required placeholder="Ex: Viajar para a Itália ✈️" class="input-field dark-field" style="padding: 0.5rem;">
+                    <button type="submit" class="btn-primary" style="padding: 0.5rem 1.25rem; border-radius: 8px;">Adicionar</button>
+                </div>
+            </form>
+
+            <!-- Lista de Desejos Renderizada Dinamicamente -->
+            <div class="bucket-list" id="bucketListContainer">
+                <!-- Itens carregados dinamicamente via JS (Suporta criação e exclusão) -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ADICIONAR NOVO MARCO À TIMELINE INFINITA (COM LIMITADOR DE CARACTERES) -->
+    <div id="addTimelineModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title font-serif">Novo Marco na Nossa História</h3>
+                <button class="btn-close" onclick="toggleModal('addTimelineModal', false)">&times;</button>
+            </div>
+            <form onsubmit="handleNewTimelineSubmit(event)" class="modal-form">
+                <div>
+                    <label class="form-label">Data ou Período</label>
+                    <input type="text" id="time_date" required placeholder="Ex: Outubro de 2024" class="input-field dark-field">
+                </div>
+                <div>
+                    <label class="form-label">Título do Momento</label>
+                    <input type="text" id="time_title" required placeholder="Ex: O dia que adotamos o Thor" class="input-field dark-field">
+                </div>
+                <div>
+                    <!-- Campo com limitador de 120 caracteres para evitar que quebre o layout do card -->
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <label class="form-label">Uma Breve Recordação</label>
+                        <span id="charCount" class="form-label" style="text-transform: none; font-weight: normal; opacity: 0.8;">0/120</span>
+                    </div>
+                    <textarea id="time_desc" rows="3" required maxlength="120" oninput="updateCharCount(this)" placeholder="Escreva o que marcou esse dia especial (Máx: 120 caracteres)..." class="textarea-field" style="background-color: var(--color-bg);"></textarea>
+                </div>
+                <div>
+                    <label class="form-label">Adicionar Foto do Marco</label>
+                    <div class="file-uploader">
+                        <input type="file" id="form_timeline_photo" accept="image/*" class="file-input" onchange="previewTimelineImage(event)">
+                        <div id="photo_timeline_placeholder" class="file-placeholder">
+                            <span>📸</span>
+                            <span>Tirar Foto / Subir Imagem</span>
+                        </div>
+                    </div>
+                    <!-- Preview Oculto da Foto Selecionada -->
+                    <div id="preview_timeline_container" class="preview-container hidden">
+                        <img id="image_timeline_preview" src="" class="preview-img" alt="Preview">
+                        <button type="button" class="btn-remove-photo" onclick="removeTimelinePreview()">&times;</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit uppercase tracking-wide">
+                    Salvar na Linha do Tempo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: CERTIFICADO DE AMOR IMPRIMÍVEL (DESIGN DE LUXO) -->
+    <div id="certificateModal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width: 32rem;">
+            <div class="modal-header">
+                <h3 class="modal-title font-serif" style="opacity: 0.6;">Nosso Documento de Afeto</h3>
+                <button class="btn-close" onclick="toggleModal('certificateModal', false)">&times;</button>
+            </div>
+            
+            <!-- Área do Certificado (Gera o PDF com perfeição) -->
+            <div id="certificatePrintArea" class="certificate-box">
+                <div class="cert-seal">💖</div>
+                <h4 class="cert-header">Certificado de Amor</h4>
+                <p class="cert-subheader">Documento de Cumplicidade Eterna</p>
+                
+                <p class="cert-body">
+                    Certificamos para todos os fins de afeto que o casal composto por
+                    <span class="cert-names block">Lucas Vasconcelos & Gabriela Ramos</span>
+                    comparte uma jornada oficial de cumplicidade, risos, apoio mútuo e amor incondicional desde a data de <b>12/06/2023</b>, tornando-se uma aliança eterna perante o coração.
+                </p>
+                
+                <div class="cert-signatures">
+                    <div class="signature-line">
+                        <span class="sig-text font-serif">Lucas V.</span>
+                        <span class="sig-label">O Noivo</span>
+                    </div>
+                    <div class="signature-line">
+                        <span class="sig-text font-serif">Gabriela R.</span>
+                        <span class="sig-label">A Noiva</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões de Controle do Modal -->
+            <div class="cert-print-btn-wrapper" style="margin-top: 1.5rem; display: flex; gap: 0.5rem;">
+                <button onclick="printCertificate()" class="btn-submit uppercase tracking-wide" style="flex: 1;">
+                    🖨️ Baixar / Imprimir PDF
+                </button>
+                <button onclick="toggleModal('certificateModal', false)" class="btn-primary" style="padding: 0.5rem 1rem; border-radius: 8px;">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX (VISUALIZADOR UNIVERSAL DE IMAGENS EM TELA CHEIA) -->
+    <div id="lightbox" class="lightbox-overlay hidden" onclick="closeLightbox()">
+        <button class="btn-close-lightbox">&times;</button>
+        <img id="lightboxImg" class="lightbox-img" src="" alt="Ampliação">
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO EM JAVASCRIPT MODULAR (IMPORTANTE: type="module") -->
+    <script type="module" src="./../js/main.js"></script>
+
+    <!-- JS DO MAPA LEAFLET -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+</body>
+</html>

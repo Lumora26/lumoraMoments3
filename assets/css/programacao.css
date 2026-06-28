@@ -1,0 +1,160 @@
+/* ==========================================================================
+   PROGRAMAÇÃO VERTICAL DINÂMICA - CORRIGIDO (programacao.css) [1]
+   ========================================================================== */
+.timeline-section {
+    margin-top: 4rem;
+}
+
+.section-header-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-title-timeline {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-rose-gold);
+    margin-top: 23px;
+}
+
+.btn-add-timeline {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    color: var(--color-blush);
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 23px;
+    transition: all 0.3s ease;
+}
+
+.btn-add-timeline:hover {
+    border-color: var(--color-rose-gold);
+    color: var(--color-text-dark);
+}
+
+.timeline-container {
+    position: relative;
+    padding-left: 2.25rem;
+    border-left: 1px solid var(--color-border);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* CARD DESLIZANTE DE FUNDO (Z-INDEX 1 - ATRÁS DO TEXTO) [1] */
+.sliding-card {
+    position: absolute;
+    left: 0.5rem;
+    right: 0;
+    background-color: var(--color-card);
+    border: 1px solid rgba(225, 168, 153, 0.4);
+    border-radius: 1rem;
+    z-index: 1; /* Camada inferior */
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px 2px rgba(225, 168, 153, 0.15);
+    pointer-events: none;
+}
+
+/* ITEM DA TIMELINE (Z-INDEX 5 - NA FRENTE DA PLACA BRANCA) [1] */
+.timeline-node {
+    position: relative;
+    padding: 1.25rem 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.5s ease;
+    z-index: 5; /* Camada superior */
+}
+
+.bullet {
+    position: absolute;
+    left: -41px;
+    top: 30px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-rose-gold);
+    transition: all 0.7s ease-in-out;
+    z-index: 10;
+}
+
+.bullet.active {
+    left: -44px;
+    top: 27px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-white);
+    border: 4px solid var(--color-blush);
+    box-shadow: 0 0 0 4px rgba(220, 128, 115, 0.15);
+}
+
+.node-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* NOVO: Estilos para mídias inseridas na linha do tempo infinita */
+.node-media {
+    margin-top: 0.75rem;
+    width: 100%;
+    max-height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.node-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.label-text {
+    font-size: 0.5625rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    transition: color 0.5s ease;
+}
+
+.label-text.active {
+    color: var(--color-blush);
+}
+
+.node-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    margin-top: 0.125rem;
+    transition: font-weight 0.5s ease;
+}
+
+.node-title.active {
+    font-weight: 700;
+}
+
+.node-desc {
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+    line-height: 1.625;
+    opacity: 0.5;
+    transform: scale(0.95);
+    transform-origin: left;
+    transition: all 0.5s ease;
+}
+
+.node-desc.active {
+    opacity: 1;
+    transform: scale(1);
+}
