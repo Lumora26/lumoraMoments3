@@ -1,12 +1,12 @@
 /**
  * ==========================================================================
- * MÓDULO: Lista de Desejos (bucket.js)
- * Sincronização em tempo real de desejos do casal diretamente do Firebase [1, 2].
+ * MÓDULO: Lista de Desejos Sincronizada (bucket.js)
+ * Sincroniza e gerencia a criação/exclusão de desejos do casal [1, 2].
  * ==========================================================================
  */
 
 import { db } from '../firebase/config.js';
-import { doc, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const CASAL_DOC_ID = "pedro-gabriela"; // Identificador exclusivo do casal na nuvem
 
@@ -17,15 +17,16 @@ export function inicializarBucketListRealTime() {
     const docRef = doc(db, "casais", CASAL_DOC_ID);
 
     onSnapshot(docRef, (docSnap) => {
-        const container = document.getElementById("bucketListContainer");
-        if (!container || !docSnap.exists()) return;
+        if (!docSnap.exists()) return; // Ignora se o documento ainda estiver inicializando
 
         const data = docSnap.data();
         const desejos = data.desejos || [];
 
-        // Armazena no cache local temporário para a função de escrita consumir sem dar conflito
+        // Armazena no cache local temporário para a função de escrita
         localStorage.setItem("lumora_love_desejos_cache", JSON.stringify(desejos));
 
+        const container = document.getElementById("bucketListContainer");
+        if (!container) return;
         container.innerHTML = ""; // Limpa a lista na tela
 
         desejos.forEach((item, index) => {
@@ -52,8 +53,6 @@ export function inicializarBucketListRealTime() {
                 deleteBtn.onclick = () => deleteBucketItem(index, desejos);
             }
         });
-    }, (error) => {
-        console.error("Erro ao escutar Lista de Desejos do Firebase:", error);
     });
 }
 
@@ -65,7 +64,7 @@ async function toggleBucketItem(index, completedStatus, desejosArray) {
     desejosArray[index].completed = completedStatus;
 
     try {
-        await updateDoc(docRef, { desejos: desejosArray });
+        await setDoc(docRef, { desejos: desejosArray }, { merge: true });
     } catch (e) {
         console.error("Erro ao atualizar desejo:", e);
     }
@@ -81,7 +80,7 @@ async function deleteBucketItem(index, desejosArray) {
     desejosArray.splice(index, 1); // Remove o item do array físico pelo índice
 
     try {
-        await updateDoc(docRef, { desejos: desejosArray });
+        await setDoc(docRef, { desejos: desejosArray }, { merge: true });
         alert("Desejo excluído com sucesso! ✨");
     } catch (e) {
         console.error("Erro ao deletar desejo:", e);
@@ -108,7 +107,7 @@ export async function handleNewBucketSubmit(event) {
         const itensAtuais = JSON.parse(localStorage.getItem("lumora_love_desejos_cache")) || [];
         itensAtuais.push(novoDesejo);
 
-        await updateDoc(docRef, { desejos: itensAtuais });
+        await setDoc(docRef, { desejos: itensAtuais }, { merge: true });
         
         input.value = ""; // Limpa campo de entrada
         alert("Mais um sonho adicionado à nossa lista de desejos! ✈️💖");
