@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumora Love • Pedro & Mariana</title>
+    
+    <!-- METATAGS DE OTIMIZAÇÃO -->
+    <meta name="description" content="Lumora - Transformando memórias em eternidade digital">
+    <meta name="author" content="Lumora">
+    <meta name="theme-color" content="#FAF5F5">
+    <link rel="shortcut icon" href="assets/img/lumora/logolumora.png" type="image/x-icon">
+    
+    <!-- FONTES DO GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- LINK PARA A FOLHA DE ESTILOS CENTRAL EM CSS PURO -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-light-theme">
+
+    <!-- CANVAS PARA CÉU ANIMADO (TWINKLING STARS & FLOATING HEARTS) -->
+    <canvas id="starryCanvas"></canvas>
+
+    <!-- MAIN: ENVOLTÓRIO DA TELA DE ABERTURA -->
+    <main class="welcome-wrapper">
+        <div id="welcomeScreen" class="welcome-screen">
+            <div class="welcome-container">
+                <!-- Tag Superior do Logo -->
+                <span class="welcome-tag">Nossa Cápsula do Tempo • Lumora Love</span>
+                
+                <!-- Título Romântico -->
+                <h1 class="welcome-title font-serif">Lucas & Gabriela</h1>
+                
+                <!-- Texto de Convite -->
+                <p class="welcome-text">
+                    Preparei um presente diferente para você. Assista ao nosso vídeo de retrospectiva antes de abrir nossa cápsula de memórias.
+                </p>
+                
+                <!-- Player de Vídeo -->
+                <div class="welcome-video-wrapper">
+                    <video id="retroVideo" class="welcome-video" controls preload="metadata">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-young-couple-walking-and-laughing-in-the-park-42345-large.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+                
+                <!-- Redirecionamento para a página interna da festa -->
+                <div class="welcome-btn-container">
+                    <a href="assets/pages/index.html" class="btn-primary uppercase tracking-wide">Abrir Nossa Cápsula</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- RODAPÉ DA ENTRADA -->
+    <footer class="discreet-footer">
+        <p>&copy; MDL • Memorial Digital Lumora</p>
+    </footer>
+
+    <!-- SCRIPT DO CÉU ESTRELADO EXCLUSIVO DA TELA DE ABERTURA -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById('starryCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            const stars = [];
+            const hearts = [];
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            for (let i = 0; i < 60; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.5,
+                    alpha: Math.random(),
+                    speed: 0.01 + Math.random() * 0.02
+                });
+            }
+
+            function createHeart() {
+                if (hearts.length < 15) {
+                    hearts.push({
+                        x: Math.random() * width,
+                        y: height + 10,
+                        size: 5 + Math.random() * 10,
+                        alpha: 0.1 + Math.random() * 0.5,
+                        speed: 0.5 + Math.random() * 1,
+                        wiggle: Math.random() * 0.02,
+                        wiggleOffset: Math.random() * 100
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                stars.forEach(star => {
+                    ctx.fillStyle = `rgba(212, 140, 112, ${star.alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    star.alpha += star.speed;
+                    if (star.alpha > 0.8 || star.alpha < 0.1) {
+                        star.speed = -star.speed;
+                    }
+                });
+
+                if (Math.random() < 0.03) createHeart();
+
+                hearts.forEach((heart, index) => {
+                    ctx.save();
+                    ctx.globalAlpha = heart.alpha;
+                    ctx.translate(heart.x + Math.sin(Date.now() * heart.wiggle + heart.wiggleOffset) * 10, heart.y);
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.bezierCurveTo(-heart.size / 2, -heart.size / 2, -heart.size, heart.size / 3, 0, heart.size);
+                    ctx.bezierCurveTo(heart.size, heart.size / 3, heart.size / 2, -heart.size / 2, 0, 0);
+                    ctx.fillStyle = "#DC8073";
+                    ctx.fill();
+                    ctx.restore();
+
+                    heart.y -= heart.speed;
+
+                    if (heart.y < -30) {
+                        hearts.splice(index, 1);
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        });
+    </script>
+</body>
+</html>
