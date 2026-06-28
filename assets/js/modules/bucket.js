@@ -17,7 +17,7 @@ export function inicializarBucketListRealTime() {
     const docRef = doc(db, "casais", CASAL_DOC_ID);
 
     onSnapshot(docRef, (docSnap) => {
-        if (!docSnap.exists()) return; // Ignora se o documento ainda estiver inicializando
+        if (!docSnap.exists()) return; // Ignora se o documento ainda estiver inicializando no timeline.js
 
         const data = docSnap.data();
         const desejos = data.desejos || [];
